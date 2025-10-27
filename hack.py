@@ -237,11 +237,13 @@ if st.button("Generate Proposal + Grant Matches"):
     """
 
     with st.spinner("Writing proposal..."):
-        resp = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role":"user","content":prompt}],
-            temperature=0.3)
-    st.session_state.generated = resp["choices"][0]["message"]["content"]
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+st.session_state.generated = response.choices[0].message.content
 
 if "generated" in st.session_state:
     st.subheader("📄 Draft Proposal")
@@ -318,12 +320,15 @@ if "feedback" in st.session_state:
         """
 
         with st.spinner("Improving..."):
-            imp = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[{"role":"user","content":improve_prompt}],
-                temperature=0.3)
-        st.session_state.improved = imp["choices"][0]["message"]["content"]
-        st.success("✅ Improved draft ready")
+    imp_resp = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": improve_prompt}
+        ]
+    )
+st.session_state.improved = imp_resp.choices[0].message.content
+st.success("✅ Improved draft ready")
+
 
 if "improved" in st.session_state:
     st.subheader("🚀 Improved Proposal")
