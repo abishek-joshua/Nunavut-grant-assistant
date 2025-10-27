@@ -4,6 +4,7 @@ import fitz
 import streamlit as st
 from docx import Document
 import openai
+import os
 
 # --------------------------------
 # Theme + Page Setup
@@ -14,9 +15,10 @@ st.set_page_config(page_title="Nunavut Grant Assistant", layout="wide")
 BLUE_BG = "background-color:#e9f4ff;border-radius:12px;padding:16px;"
 GREEN_BG = "background-color:#e9ffe9;border-radius:12px;padding:16px;"
 
-openai.api_key = st.secrets.get("OPENAI_API_KEY")
-if not openai.api_key:
-    st.warning("⚠️ Please add your OpenAI API key in Streamlit Secrets.")
+if not openai_api_key:
+    st.error("❌ Missing OpenAI API Key — please set it in deployment environment.")
+else:
+    openai.api_key = openai_api_key
 
 # --------------------------------
 # Grant Database (Business-focused)
