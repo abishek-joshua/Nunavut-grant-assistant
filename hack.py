@@ -15,10 +15,10 @@ st.set_page_config(page_title="Nunavut Grant Assistant", layout="wide")
 BLUE_BG = "background-color:#e9f4ff;border-radius:12px;padding:16px;"
 GREEN_BG = "background-color:#e9ffe9;border-radius:12px;padding:16px;"
 
-openai_api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai_api_key:
-    st.error("❌ Missing OpenAI API Key — please set it in deployment environment.")
+    st.error("❌ OpenAI API Key missing! Please add it as an environment variable in your deploy platform.")
 else:
     openai.api_key = openai_api_key
 
