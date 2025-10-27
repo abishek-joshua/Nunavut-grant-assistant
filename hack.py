@@ -242,7 +242,7 @@ if st.button("Generate Proposal + Grant Matches"):
                 {"role": "user", "content": prompt}
             ]
         )
-st.session_state.generated = response.choices[0].message.content
+    st.session_state.generated = response.choices[0].message.content
 
 if "generated" in st.session_state:
     st.subheader("📄 Draft Proposal")
@@ -322,7 +322,7 @@ if "feedback" in st.session_state:
             imp_resp = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                {"role": "user", "content": improve_prompt}
+                    {"role": "user", "content": improve_prompt}
                 ]
             )
 
