@@ -237,12 +237,12 @@ if st.button("Generate Proposal + Grant Matches"):
     """
 
     with st.spinner("Writing proposal..."):
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
-    )
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
 st.session_state.generated = response.choices[0].message.content
 
 if "generated" in st.session_state:
