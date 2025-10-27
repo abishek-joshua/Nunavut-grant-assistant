@@ -320,12 +320,12 @@ if "feedback" in st.session_state:
         """
 
         with st.spinner("Improving..."):
-    imp_resp = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": improve_prompt}
-        ]
-    )
+            imp_resp = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": improve_prompt}
+            ]
+          )
 st.session_state.improved = imp_resp.choices[0].message.content
 st.success("✅ Improved draft ready")
 
